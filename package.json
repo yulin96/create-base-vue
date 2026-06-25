@@ -1,6 +1,6 @@
 {
   "name": "create-base-vue",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Create a base Vue project from yulin96/base_vite_vue3 and push it to Gitea.",
   "type": "module",
   "repository": {
