@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "description": "Create a base Vue project from yulin96/base_vite_vue3 and push it to Gitea.",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yulin96/create-base-vue.git"
+  },
   "bin": {
     "create-base-vue": "bin/create-base-vue.js"
   },
@@ -16,6 +20,9 @@
   },
   "dependencies": {
     "@clack/prompts": "^1.6.0"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "engines": {
     "node": ">=20.12.0"

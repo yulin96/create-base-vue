@@ -8,6 +8,59 @@
 npx create-base-vue
 ```
 
+## 发布
+
+这个包发布到 npm 后，就可以通过 `npx create-base-vue` 使用。
+
+当前推荐使用 npm OIDC Trusted Publishing 发布，不在 GitHub 仓库里保存 npm token。
+
+### 首次发布
+
+`create-base-vue` 这个包名当前在 npm 上还没有查到已发布版本，可以使用。
+
+npm 的 OIDC 发布需要先在 npm 包设置里绑定 GitHub workflow。新包如果还没有 npm 页面，通常需要先手动发布第一个版本：
+
+```bash
+cd C:\Users\ZYuLi\web\create-base-vue
+npm login
+npm publish --access public
+```
+
+本地终端没有 OIDC 环境，所以首次发布不要带 `--provenance`。首次发布成功后，再到 npm 包页面配置 Trusted Publisher。
+
+### OIDC 发布配置
+
+在 npmjs.com 的包设置里添加 Trusted Publisher：
+
+- Provider：GitHub Actions
+- GitHub user / org：`yulin96`
+- Repository：`create-base-vue`
+- Workflow filename：`publish.yml`
+- Allowed actions：`npm publish`
+
+GitHub 侧已经添加发布工作流：
+
+```text
+.github/workflows/publish.yml
+```
+
+这个 workflow 会：
+
+1. 安装依赖。
+2. 执行 `pnpm lint`。
+3. 执行 `npm pack --dry-run`。
+4. 使用 OIDC 发布到 npm。
+
+后续发布新版本：
+
+```bash
+pnpm version patch
+git push
+git push --tags
+```
+
+推送 `v*` tag 后，GitHub Actions 会自动发布。也可以在 GitHub Actions 页面手动运行 `Publish`。
+
 ## 本地测试
 
 不要用 `pnpm dlx .\create-base-vue` 测本地目录包；`dlx` 会在临时目录里解析依赖，容易找不到相对路径。
