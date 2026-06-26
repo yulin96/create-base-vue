@@ -303,11 +303,20 @@ function updateEnv(targetDir, projectName) {
 }
 
 function applyPcMode(targetDir, pageSize) {
+  commentSetRemImport(targetDir)
   commentPxtorem(targetDir)
   updateMainCss(targetDir)
   updateTailwindCss(targetDir)
   updateThemeCss(targetDir, pageSize.width, pageSize.height)
   replaceAgents(targetDir)
+}
+
+function commentSetRemImport(targetDir) {
+  const filePath = resolve(targetDir, 'src/plugins/appInit.ts')
+  if (!existsSync(filePath)) return
+
+  const source = readFileSync(filePath, 'utf8')
+  writeFileIfChanged(filePath, source, commentImport(source, '@/plugins/setup/setRem'))
 }
 
 function commentPxtorem(targetDir) {
@@ -433,6 +442,12 @@ function commentCssImport(source, importPath) {
   const escapedPath = escapeRegExp(importPath)
   const pattern = new RegExp(`^(@import ['"]${escapedPath}['"];)$`, 'm')
   return source.replace(pattern, '/* $1 */')
+}
+
+function commentImport(source, importPath) {
+  const escapedPath = escapeRegExp(importPath)
+  const pattern = new RegExp(`^(import ['"]${escapedPath}['"]\\s*)$`, 'm')
+  return source.replace(pattern, '// $1')
 }
 
 function commentCall(source, callee) {
