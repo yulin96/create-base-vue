@@ -423,7 +423,7 @@ function initGitAndPush({ targetDir, remoteUrl }) {
   run('git', ['init'], { cwd: targetDir })
   run('git', ['branch', '-M', 'main'], { cwd: targetDir })
   run('git', ['add', '.'], { cwd: targetDir })
-  run('git', ['commit', '-m', 'init'], { cwd: targetDir })
+  run('git', ['commit', '-m', 'init: 初始化项目'], { cwd: targetDir })
   run('git', ['remote', 'add', 'origin', remoteUrl], { cwd: targetDir })
   run('git', ['push', '-u', 'origin', 'main'], { cwd: targetDir })
 
