@@ -312,7 +312,7 @@ function applyPcMode(targetDir, pageSize) {
 }
 
 function commentSetRemImport(targetDir) {
-  const filePath = resolve(targetDir, 'src/plugins/appInit.ts')
+  const filePath = resolve(targetDir, 'src/main.ts')
   if (!existsSync(filePath)) return
 
   const source = readFileSync(filePath, 'utf8')

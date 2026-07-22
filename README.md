@@ -122,7 +122,7 @@ npx create-base-vue -- --name dz2606 --type mobile --yes
 6. PC 项目继续询问设计稿宽高。
 7. 从 GitHub 拉取 `yulin96/base_vite_vue3`。
 8. 删除模板里的 `renovate.json` 和 `.github/workflows` 工作流。
-9. 修改项目名、环境变量和 PC / 移动端配置。PC 项目会注释 `src/plugins/appInit.ts` 里的移动端 rem 初始化。
+9. 修改项目名、环境变量和 PC / 移动端配置。PC 项目会注释 `src/main.ts` 里的移动端 rem 初始化。
 10. 如果选择上传，创建 Gitea 仓库。
 11. 如果选择上传，初始化 Git，设置 remote，提交并推送。
 
