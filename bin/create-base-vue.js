@@ -271,6 +271,8 @@ function customizeProject({ targetDir, projectName, projectType, pageSize }) {
 
   if (projectType === 'pc') {
     applyPcMode(targetDir, pageSize)
+  } else {
+    rmSync(resolve(targetDir, 'AGENTS-PC.md'), { force: true })
   }
 
   s.stop('项目配置修改完成')
