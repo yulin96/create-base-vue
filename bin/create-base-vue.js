@@ -89,6 +89,7 @@ if (shouldPush) {
 }
 
 outro(shouldPush ? `项目已创建并推送：${remoteUrl}` : `项目已创建：${targetDir}`)
+console.log(`\n下一步：\n  cd "./${projectName}"\n  pnpm install\n  pnpm dev\n`)
 
 async function askProjectName() {
   const defaultName = `demo-${getYearMonthSuffix()}`

@@ -8,6 +8,24 @@
 npx create-base-vue
 ```
 
+创建成功后会显示下一步命令，例如：
+
+```bash
+cd "./my-project"
+pnpm install
+pnpm dev
+```
+
+请在当前终端执行显示的 `cd` 命令。CLI 子进程无法直接切换调用它的终端目录。
+
+## 与基础库同步维护
+
+模板源码为 `yulin96/base_vite_vue3`，本地通常是同级 `base-vue3` 目录。转换入口是 `bin/create-base-vue.js` 中的 `customizeProject`，PC 转换集中在 `applyPcMode`。
+
+修改模板路径、环境变量、移动端初始化、pxtorem、Tailwind 尺寸规则或规范文件时，必须核对 [基础库的脚手架同步维护清单](https://github.com/yulin96/base_vite_vue3#脚手架同步维护)，同步调整相关转换逻辑。新增转换规则时也更新该清单。
+
+生成使用 GitHub 模板，不使用本地 `base-vue3` 的未推送改动。修改脚手架后先进行最小验证；需要让 `npx` 用户使用新逻辑时，还需发布 npm 新版本。
+
 ## 发布
 
 这个包发布到 npm 后，就可以通过 `npx create-base-vue` 使用。
@@ -125,6 +143,7 @@ npx create-base-vue -- --name dz2606 --type mobile --yes
 9. 修改项目名、环境变量和 PC / 移动端配置。PC 项目会注释 `src/main.ts` 里的移动端 rem 初始化，移动端项目会删除 `AGENTS-PC.md`。
 10. 如果选择上传，创建 Gitea 仓库。
 11. 如果选择上传，初始化 Git，设置 remote，提交并推送。
+12. 显示进入新项目目录的 `cd` 命令，以及安装依赖、启动开发的命令。
 
 ## 参数
 
