@@ -89,7 +89,16 @@ if (shouldPush) {
 }
 
 outro(shouldPush ? `项目已创建并推送：${remoteUrl}` : `项目已创建：${targetDir}`)
-console.log(`\n下一步：\n  cd "./${projectName}"\n  pnpm install\n  pnpm dev\n`)
+if (process.stdin.isTTY && process.stdout.isTTY) {
+  console.log('\n即将进入项目目录，输入 exit 返回原目录。\n\n下一步：\n  pnpm install\n  pnpm dev\n')
+  const shell = process.platform === 'win32' ? 'powershell.exe' : process.env.SHELL || '/bin/sh'
+  const shellArgs = process.platform === 'win32' ? ['-NoLogo', '-NoExit'] : ['-i']
+  const result = spawnSync(shell, shellArgs, { cwd: targetDir, stdio: 'inherit' })
+  if (result.error) throw result.error
+  process.exitCode = result.status ?? 1
+} else {
+  console.log(`\n下一步：\n  cd "./${projectName}"\n  pnpm install\n  pnpm dev\n`)
+}
 
 async function askProjectName() {
   const defaultName = `demo-${getYearMonthSuffix()}`
@@ -280,6 +289,7 @@ function customizeProject({ targetDir, projectName, projectType, pageSize }) {
 }
 
 function cleanupTemplateFiles(targetDir) {
+  rmSync(resolve(targetDir, 'HANDOFF.MD'), { force: true })
   rmSync(resolve(targetDir, 'renovate.json'), { force: true })
   rmSync(resolve(targetDir, '.github', 'workflows'), { recursive: true, force: true })
 }

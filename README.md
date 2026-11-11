@@ -8,15 +8,14 @@
 npx create-base-vue
 ```
 
-创建成功后会显示下一步命令，例如：
+在交互式终端中创建成功后，会自动在新项目目录启动子 Shell（Windows 使用 PowerShell，其他系统使用 `$SHELL` 或 `/bin/sh`），可直接执行：
 
 ```bash
-cd "./my-project"
 pnpm install
 pnpm dev
 ```
 
-请在当前终端执行显示的 `cd` 命令。CLI 子进程无法直接切换调用它的终端目录。
+输入 `exit` 退出子 Shell，返回原终端目录。非交互运行时不会启动子 Shell，会显示进入项目目录的 `cd` 命令。
 
 ## 与基础库同步维护
 
@@ -139,11 +138,11 @@ npx create-base-vue -- --name dz2606 --type mobile --yes
 5. 选择项目类型：移动端 H5 / PC 固定比例大屏。
 6. PC 项目继续询问设计稿宽高。
 7. 从 GitHub 拉取 `yulin96/base_vite_vue3`。
-8. 删除模板里的 `renovate.json` 和 `.github/workflows` 工作流。
+8. 删除模板里的 `HANDOFF.MD`、`renovate.json` 和 `.github/workflows` 工作流。
 9. 修改项目名、环境变量和 PC / 移动端配置。PC 项目会注释 `src/main.ts` 里的移动端 rem 初始化，移动端项目会删除 `AGENTS-PC.md`。
 10. 如果选择上传，创建 Gitea 仓库。
 11. 如果选择上传，初始化 Git，设置 remote，提交并推送。
-12. 显示进入新项目目录的 `cd` 命令，以及安装依赖、启动开发的命令。
+12. 显示安装依赖、启动开发的命令，并在交互式终端中自动进入新项目目录的子 Shell；非交互运行时显示 `cd` 命令。
 
 ## 参数
 
